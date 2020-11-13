@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
+<Configure id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
+
+  <!-- Prohibit old and untrustworthy ciphers -->
+  <Call name="addExcludeCipherSuites">
+    <Arg>
+      <Array type="String">
+        <Item>.*DES.*</Item>
+        <Item>.*DSS.*</Item>
+        <Item>.*MD5.*</Item>
+        <Item>.*NULL.*</Item>
+        <Item>.*RC4.*</Item>
+        <Item>.*_RSA_.*MD5$</Item>
+        <Item>.*_RSA_.*SHA$</Item>
+        <Item>.*_RSA_.*SHA1$</Item>
+        <Item>TLS_DHE_RSA_WITH_AES_128.*</Item>
+        <Item>TLS_DHE_RSA_WITH_AES_256.*</Item>
+      </Array>
+    </Arg>
+  </Call>
+
+  <!-- Prohibit untrustworthy protocols -->
+  <Call name="addExcludeProtocols">
+    <Arg>
+     <Array type="java.lang.String">
+       <Item>SSL</Item>
+       <Item>SSLv2</Item>
+       <Item>SSLv2Hello</Item>
+       <Item>SSLv3</Item>
+       <Item>TLSv1</Item>
+       <Item>TLSv1.1</Item>
+     </Array>
+    </Arg>
+  </Call>
+
+  <!-- Enabling Forward Secrecy -->
+  <Set name="IncludeCipherSuites">
+    <Array type="String">
+      <Item>TLS_DHE_RSA.*</Item>
+      <Item>TLS_ECDHE.*</Item>
+    </Array>
+  </Set>
+
+</Configure>
