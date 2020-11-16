@@ -43,6 +43,10 @@ ENV IDP_HOST_NAME=idp.example.org
 ENV IDP_ENTITY_ID=https://idp.example.org/idp/shibboleth
 ENV IDP_KEYSTORE_PASSWORD=password
 ENV IDP_SEALER_PASSWORD=password
+ENV JETTY_JAVA_ARGS="jetty.home=$JETTY_HOME \
+    jetty.base=$JETTY_BASE \
+    -Djetty.sslContext.keyStorePassword=$JETTY_KEYSTORE_PASSWORD \
+    -Djetty.sslContext.keyStorePath=$JETTY_KEYSTORE_PATH"
 ENV PATH=$PATH:$JAVA_HOME/bin
 
 RUN apk --no-cache add openjdk11-jre-headless curl bash
@@ -60,8 +64,4 @@ COPY /opt/ /opt/
 EXPOSE 8080 8443
 
 # Jettyを起動する。
-CMD $JAVA_HOME/bin/java -jar $JETTY_HOME/start.jar \
-    jetty.home=$JETTY_HOME jetty.base=$JETTY_BASE \
-    -Djetty.sslContext.keyStorePassword=$JETTY_KEYSTORE_PASSWORD \
-    -Djetty.sslContext.keyStorePath=$JETTY_KEYSTORE_PATH \
-    $JAVA_ADDITIONAL_ARGS
+CMD $JAVA_HOME/bin/java -jar $JETTY_HOME/start.jar $JETTY_JAVA_ARGS
