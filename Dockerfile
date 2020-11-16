@@ -21,7 +21,7 @@ RUN wget -q https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/
 # Jettyの初期設定を行う。
 RUN mkdir -p $JETTY_BASE/modules $JETTY_BASE/lib/ext $JETTY_BASE/lib/logging $JETTY_BASE/resources \
     && cd $JETTY_BASE \
-    && $JAVA_HOME/bin/java -jar $JETTY_HOME/start.jar --create-startd --add-to-start=http2,http2c,deploy,ext,annotations,jstl,rewrite,ssl
+    && $JAVA_HOME/bin/java -jar $JETTY_HOME/start.jar --create-startd --add-to-start=http2,http2c,deploy,ext,annotations,jstl,rewrite,ssl,http-forwarded
 
 COPY opt/jetty-base/etc/tweak-ssl.xml $JETTY_BASE/etc/tweak-ssl.xml
 COPY opt/jetty-base/webapps/idp.xml $JETTY_BASE/webapps/idp.xml
