@@ -28,8 +28,8 @@ COPY opt/jetty-base/webapps/idp.xml $JETTY_BASE/webapps/idp.xml
 
 FROM alpine:latest
 
-ENV IDP_VERSION=4.0.1
-ENV IDP_HASH=832f73568c5b74a616332258fd9dc555bb20d7dd9056c18dc0ccf52e9292102a
+ENV IDP_VERSION=4.3.1
+ENV IDP_HASH=04d08d324a5a5f016ca69b96dbab58abbb5b3e0045455cc15cf0d33ffd6742d5
 
 ENV JETTY_HOME=/opt/jetty-home
 ENV JETTY_BASE=/opt/jetty-base
